@@ -77,7 +77,14 @@ TSet& TSet::operator=(const TSet& s) // присваивание
 
 int TSet::operator==(const TSet& s) const // сравнение
 {
-	return (MaxPower == s.MaxPower) && (BitField == s.BitField);
+	if ((MaxPower == s.MaxPower) && (BitField == s.BitField))
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 int TSet::operator!=(const TSet& s) const // сравнение
@@ -128,15 +135,7 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 
 TSet TSet::operator*(const TSet& s) // пересечение
 {
-	int len = 0;
-	if (MaxPower < s.MaxPower)
-	{
-		len = MaxPower;
-	}
-	else
-	{
-		len = s.MaxPower;
-	}
+	int len = std::max(MaxPower, s.MaxPower);
 	TSet res(len);
 
 	res.BitField = BitField & s.BitField;
